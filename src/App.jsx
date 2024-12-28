@@ -1,15 +1,16 @@
 import { useState } from "react";
-import homme from '/public/homme.png';
-import femme from '/public/femme.png';
-import imagee from '/public/img.jpg'; 
-import "./App.css"
+import homme from '/homme.png'; // Correct image path
+import femme from '/femme.png'; // Correct image path
+// import "App.css"; 
+import "./App.css";
+
 
 export default function App() {
     const [taille, setTaille] = useState("");
     const [genre, setGenre] = useState("");
     const [res, setRes] = useState("");
     const [error, setError] = useState("");
-    const [isHovered, setIsHovered] = useState(false); // State to handle hover effect
+    const [isHovered, setIsHovered] = useState(false);
 
     const calculateWeight = () => {
         if (!taille || !genre) {
@@ -34,56 +35,56 @@ export default function App() {
     };
 
     return (
-      <div className="container">
-      <div className="card">
-          <h1>Calcul de Poids Idéal</h1>
+        <div className="container">
+            <div className="card">
+                <h1>Calcul de Poids Idéal</h1>
 
-          {/* Taille Input */}
-          <div className="input-group">
-              <label>Taille en CM</label><br />
-              <input
-                  type="number"
-                  value={taille}
-                  onChange={(e) => setTaille(e.target.value)}
-              />
-          </div>
+                {/* Taille Input */}
+                <div className="input-group">
+                    <label>Taille en CM</label><br />
+                    <input
+                        type="number"
+                        value={taille}
+                        onChange={(e) => setTaille(e.target.value)}
+                    />
+                </div>
 
-          {/* Genre Input */}
-          <div className="input-group">
-              <label>Genre</label><br />
-              <div className="gender-select">
-                  <select
-                      onChange={(e) => setGenre(e.target.value)}
-                  >
-                      <option value="">Choisissez</option>
-                      <option value="homme">Homme</option>
-                      <option value="femme">Femme</option>
-                  </select>
-                  {genre && (
-                      <img
-                          src={genre === "homme" ? homme : femme}
-                          alt={genre}
-                          style={{ width: '35px', marginLeft: '10px' }}
-                      />
-                  )}
-              </div>
-          </div>
+                {/* Genre Input */}
+                <div className="input-group">
+                    <label>Genre</label><br />
+                    <div className="gender-select">
+                        <select
+                            onChange={(e) => setGenre(e.target.value)}
+                        >
+                            <option value="">Choisissez</option>
+                            <option value="homme">Homme</option>
+                            <option value="femme">Femme</option>
+                        </select>
+                        {genre && (
+                            <img
+                                src={genre === "homme" ? homme : femme}
+                                alt={genre}
+                                className="gender-icon"
+                            />
+                        )}
+                    </div>
+                </div>
 
-          {/* Error/Result Display */}
-          <div className={`error-result ${error ? 'error' : ''}`}>
-              {error || res}
-          </div>
+                {/* Error/Result Display */}
+                <div className={`error-result ${error ? 'error' : ''}`}>
+                    {error || res}
+                </div>
 
-          {/* Calculate Button */}
-          <button
-              onClick={calculateWeight}
-              className="button"
-              onMouseEnter={() => setIsHovered(true)}
-              onMouseLeave={() => setIsHovered(false)}
-          >
-              Calculer
-          </button>
-      </div>
-  </div>
+                {/* Calculate Button */}
+                <button
+                    onClick={calculateWeight}
+                    className={`button ${isHovered ? 'hover' : ''}`}
+                    onMouseEnter={() => setIsHovered(true)}
+                    onMouseLeave={() => setIsHovered(false)}
+                >
+                    Calculer
+                </button>
+            </div>
+        </div>
     );
 }
